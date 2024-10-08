@@ -27,8 +27,8 @@ public class Especificaciones {
         
         Scanner scan = new Scanner(System.in);
         int opcion = 0;
-        
-        File f = new File("archivo_texto.txt");
+        String nomEspecificacion = "";
+        File f = new File("C:/PROYECTOALGORITMOSJAVA/Especificaciones.txt");
         
         System.out.println("1. Agregar especificaciones");
         System.out.println("2. Leer especificaciones");
@@ -42,7 +42,13 @@ public class Especificaciones {
                     try {
                         FileWriter fw = new FileWriter(f, true); //El true indica que hay dats en el archivo para que no los borre y solo agregue datos 
                         BufferedWriter bw = new BufferedWriter(fw);
-                        bw.write("654321|ESPECIFICACION AGREGADA|\n");
+                        System.out.println("Ingrese el nombre de la Caracteristica ");
+                        nomEspecificacion = scan.nextLine();                      
+                        bw.write(nomEspecificacion + "\n");
+                        while (nomEspecificacion.isEmpty()) {
+                            System.out.println("El nombre no puede estar en blanco");
+                            System.out.println("Ingrese el nombre de la Especificacion ");
+                            nomEspecificacion = scan.nextLine(); }
                         bw.close();
                     } catch (IOException ex) {
                         Logger.getLogger(Especificaciones.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +75,7 @@ public class Especificaciones {
                         FileReader fr = new FileReader(f);
                         BufferedReader br = new BufferedReader(fr); //Abren el archivo
                         
-                        File fc = new File("archivo_texto_copia.txt"); //Crea una copia
+                        File fc = new File("C:/PROYECTOALGORITMOSJAVA/copiaEspecificaciones.txt"); //Crea una copia
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);               
                         String linea = "";
@@ -99,7 +105,7 @@ public class Especificaciones {
                         BufferedReader br = new BufferedReader(fr); //Las primeras 2 lineas abren el archivo para lectura
                         
                        
-                        File fc = new File("archivo_texto_copia.txt"); //
+                        File fc = new File("C:/PROYECTOALGORITMOSJAVA/copiaEspecificaciones.txt"); //
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);
                         

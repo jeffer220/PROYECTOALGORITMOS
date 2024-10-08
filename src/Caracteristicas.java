@@ -26,12 +26,11 @@ public class Caracteristicas {
         int opcion = 0;
         String nomCaracteristica = "";
         
-        File f = new File("C:/ProyectoAlgoritmos/Caracteristicas.txt");
+        File f = new File("C:/PROYECTOALGORITMOSJAVA/Caracteristicas.txt");
         
         System.out.println("1. Agregar Caracteristicas");
-        System.out.println("2. Leer Caracetristicas");
-        System.out.println("3. Actualizar Caracteristcias");
-        System.out.println("4. Eliminar Caracteristicas");
+        System.out.println("2. Actualizar Caracteristcias");
+        System.out.println("3. Eliminar Caracteristicas");
         System.out.print("Seleccione operacion a realizar: ");
         opcion = scan.nextInt();
         
@@ -53,28 +52,12 @@ public class Caracteristicas {
                         Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-
-            case 2: //Permite leer los datos que se encuentren en el archivo
-                    try {
-                        FileReader fr = new FileReader(f); //Abre un archivo para leerlo
-                        BufferedReader br = new BufferedReader(fr);
-                        String linea = ""; 
-                        while((linea = br.readLine()) != null) { //Realiza la lectura hasta que no haya mas lineas por leer
-                            System.out.println(linea);
-                        } 
-                        br.close();
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                    Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-            case 3:
+            case 2:
                     try {
                         FileReader fr = new FileReader(f);
                         BufferedReader br = new BufferedReader(fr); //Abren el archivo
                         
-                        File fc = new File("C:/ProyectoAlgoritmos/CopiaCaracteristicas.txt");
+                        File fc = new File("C:/PROYECTOALGORITMOSJAVA/CopiaCaracteristicas.txt");
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);               
                         String linea = "";
@@ -98,13 +81,13 @@ public class Caracteristicas {
                     Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
                     } 
                     break;
-            case 4: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
+            case 3: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
                     try {
                         FileReader fr = new FileReader(f);
                         BufferedReader br = new BufferedReader(fr); //Las primeras 2 lineas abren el archivo para lectura
                         
                        
-                        File fc = new File("C:/ProyectoAlgoritmos/CopiaCaracteristicas.txt"); //
+                        File fc = new File("C:/PROYECTOALGORITMOSJAVA/CopiaCaracteristicas.txt"); //
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);
                         
