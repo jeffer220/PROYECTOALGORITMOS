@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,7 @@ public class Categorias {
         Scanner scan = new Scanner(System.in);
         int opcion = 0;
         String nomCategoria = "";
+        String codigo = "";
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Categorias.txt");
         
         
@@ -39,17 +41,19 @@ public class Categorias {
                try {
         FileWriter fw = new FileWriter(f, true); 
         BufferedWriter bw = new BufferedWriter(fw);
-        System.out.println("Ingrese el nombre de la categoria ");
+        System.out.println("Ingrese el codigo y nombre de la categoria separados por | ");
         nomCategoria = scan.nextLine();
+       String delimitador = "|"; // Especifica el delimitador
+       StringTokenizer tokenizer = new StringTokenizer(nomCategoria, delimitador);
         while (nomCategoria.isEmpty()) {
             System.out.println("El nombre no puede estar en blanco");
                 System.out.println("Ingrese el nombre de la categoria ");
                     nomCategoria = scan.nextLine(); }
         bw.write(nomCategoria + "\n");
         bw.close();
-    } catch (IOException ex) {
+        } catch (IOException ex) {
         Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
-    }
+       }
     break;
             case 2:
                     try {
@@ -60,11 +64,14 @@ public class Categorias {
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);               
                         String linea = "";
-                        
-                        while((linea = br.readLine()) != null) {
+                           while((linea = br.readLine()) != null) {                              
                             String [] datos = linea.split("\\|");
-                            if (datos[0].compareTo("1") == 0) {
-                                linea = "Categoria Nueva";
+                            System.out.println("Ingrese el codigo");
+                            codigo = scan.nextLine();
+                            if (datos[0].compareTo(codigo) == 0) {
+                                System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
+                                String nuevaCat = scan.nextLine();
+                                linea = nuevaCat;
                             }
                             
                             bw.write(linea+"\n");
