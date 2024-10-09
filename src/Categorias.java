@@ -53,8 +53,9 @@ public class Categorias {
         bw.close();
         } catch (IOException ex) {
         Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
-       }
-    break;
+        }
+          break;
+    
             case 2:
                     try {
                         FileReader fr = new FileReader(f);
@@ -63,11 +64,11 @@ public class Categorias {
                         File fc = new File("C:/PROYECTOALGORITMOSJAVA/copiaCategorias.txt"); //Crea una copia
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);               
-                        String linea = "";
+                        String linea = "";                     
+                        System.out.println("Ingrese el codigo");
+                            codigo = scan.nextLine();                         
                            while((linea = br.readLine()) != null) {                              
-                            String [] datos = linea.split("\\|");
-                            System.out.println("Ingrese el codigo");
-                            codigo = scan.nextLine();
+                            String [] datos = linea.split("\\|");                
                             if (datos[0].compareTo(codigo) == 0) {
                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
                                 String nuevaCat = scan.nextLine();
@@ -87,6 +88,7 @@ public class Categorias {
                     Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
                     } 
                     break;
+                    
             case 3: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
                     try {
                         FileReader fr = new FileReader(f);
