@@ -25,7 +25,9 @@ public class Categorias {
         Scanner scan = new Scanner(System.in);
         int opcion = 0;
         String nomCategoria = "";
-        String codigo = "";
+        String codigoActualizacion = "";
+        String codigoEliminacion = "";
+        String nuevaCat = "";
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Categorias.txt");
         
         
@@ -46,7 +48,7 @@ public class Categorias {
        String delimitador = "|"; // Especifica el delimitador
        StringTokenizer tokenizer = new StringTokenizer(nomCategoria, delimitador);
         while (nomCategoria.isEmpty()) {
-            System.out.println("El nombre no puede estar en blanco");
+            System.out.println("El nombre de la categoria no puede estar en blanco");
                 System.out.println("Ingrese el nombre de la categoria ");
                     nomCategoria = scan.nextLine(); }
         bw.write(nomCategoria + "\n");
@@ -66,12 +68,17 @@ public class Categorias {
                         BufferedWriter bw = new BufferedWriter(fw);               
                         String linea = "";                     
                         System.out.println("Ingrese el codigo");
-                            codigo = scan.nextLine();                         
+                            codigoActualizacion = scan.nextLine();                         
                            while((linea = br.readLine()) != null) {                              
                             String [] datos = linea.split("\\|");                
-                            if (datos[0].compareTo(codigo) == 0) {
+                            if (datos[0].compareTo(codigoActualizacion) == 0) {
                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
-                                String nuevaCat = scan.nextLine();
+                                nuevaCat = scan.nextLine();
+                                while (nuevaCat.isEmpty()) {
+                                System.out.println("El nombre de la nueva categoria no puede estar en blanco");
+                                System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
+                                nuevaCat = scan.nextLine();
+                                }
                                 linea = nuevaCat;
                             }
                             
@@ -100,10 +107,11 @@ public class Categorias {
                         BufferedWriter bw = new BufferedWriter(fw);
                         
                         String linea = "";
-                        
+                        System.out.println("Ingrese el codigo");
+                         codigoEliminacion = scan.nextLine();                       
                         while((linea = br.readLine()) != null) { //Lee el archivo original linea por linea
                             String [] datos = linea.split("\\|"); //Utiliza el split que divide la cadena en subcadenas por medio de "|" 
-                            if (datos[0].compareTo("1") != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
+                            if (datos[0].compareTo(codigoEliminacion) != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
                                 bw.write(linea+"\n"); 
                             }
                         } 
