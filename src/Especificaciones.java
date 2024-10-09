@@ -33,6 +33,7 @@ public class Especificaciones {
         System.out.println("4. Eliminar especificaciones");
         System.out.print("Seleccione operacion a realizar: ");
         opcion = scan.nextInt();
+        scan.nextLine();
         
         switch (opcion) {
             case 1: 
