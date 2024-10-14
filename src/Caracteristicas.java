@@ -29,7 +29,7 @@ public class Caracteristicas {
         String nomCaracteristica = "";
         String nuevaCarac = "";
         String codigoEliminacion = "";
-        
+        String confirmacion = "";
         File carac = new File("C:/PROYECTOALGORITMOSJAVA/Caracteristicas.txt");
         
          System.out.println("Estas son las caracteristicas existentes: ");
@@ -123,7 +123,14 @@ public class Caracteristicas {
                         String linea = "";
                         System.out.println("Ingrese el codigo");
                          codigoEliminacion = scan.nextLine(); 
-                        
+                         
+                         System.out.println("Desea eliminar la caracteristica? (Si/No) ");
+                         confirmacion = scan.nextLine();
+                        if (!confirmacion.equalsIgnoreCase("si")) {
+                            System.out.println("Eliminacion Cancelada");
+                            return;
+                        }
+                                               
                         while((linea = br.readLine()) != null) { //Lee el archivo original linea por linea
                             String [] datos = linea.split("\\|"); //Utiliza el split que divide la cadena en subcadenas por medio de "|" 
                             if (datos[0].compareTo(codigoEliminacion) != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina

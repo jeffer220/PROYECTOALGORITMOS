@@ -28,6 +28,7 @@ public class Categorias {
         String codigoActualizacion = "";
         String codigoEliminacion = "";
         String nuevaCat = "";
+        String confirmacion = "";
        
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Categorias.txt");
          
@@ -146,7 +147,15 @@ public class Categorias {
                         
                         String linea = "";
                         System.out.println("Ingrese el codigo");
-                         codigoEliminacion = scan.nextLine();                       
+                         codigoEliminacion = scan.nextLine();  
+                         
+                          System.out.println("Desea eliminar la Categoria? (Si/No) ");
+                         confirmacion = scan.nextLine();
+                        if (!confirmacion.equalsIgnoreCase("si")) {
+                            System.out.println("Eliminacion Cancelada");
+                            return;
+                        }
+                         
                         while((linea = br.readLine()) != null) { //Lee el archivo original linea por linea
                             String [] datos = linea.split("\\|"); //Utiliza el split que divide la cadena en subcadenas por medio de "|" 
                             if (datos[0].compareTo(codigoEliminacion) != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
