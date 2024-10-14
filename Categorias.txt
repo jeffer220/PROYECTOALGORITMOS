@@ -1,0 +1,2 @@
+1|Categoria uno
+2|Categoria dos

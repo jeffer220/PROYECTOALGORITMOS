@@ -1,2 +1,1 @@
-1|caracteristica uno
-2|Caracteristica actualizada
+1|Caracteristica uno

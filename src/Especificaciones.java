@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,36 +26,13 @@ public class Especificaciones {
         Scanner scan = new Scanner(System.in);
         int opcion = 0;
         String nomEspecificacion = "";
+        String codActuEs = "";
+        String nuevaEspeci = "";
+        String codigoEliminacion = "";
+        
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Especificaciones.txt");
-        
-        System.out.println("1. Agregar especificaciones");
-        System.out.println("2. Leer especificaciones");
-        System.out.println("3. Actualizar especificaciones");
-        System.out.println("4. Eliminar especificaciones");
-        System.out.print("Seleccione operacion a realizar: ");
-        opcion = scan.nextInt();
-        scan.nextLine();
-        
-        switch (opcion) {
-            case 1: 
-                    try {
-                        FileWriter fw = new FileWriter(f, true); //El true indica que hay dats en el archivo para que no los borre y solo agregue datos 
-                        BufferedWriter bw = new BufferedWriter(fw);
-                        System.out.println("Ingrese el nombre de la Caracteristica ");
-                        nomEspecificacion = scan.nextLine();                      
-                        bw.write(nomEspecificacion + "\n");
-                        while (nomEspecificacion.isEmpty()) {
-                            System.out.println("El nombre no puede estar en blanco");
-                            System.out.println("Ingrese el nombre de la Especificacion ");
-                            nomEspecificacion = scan.nextLine(); }
-                        bw.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Especificaciones.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
-
-            case 2: //Permite leer los datos que se encuentren en el archivo
-                    try {
+         System.out.println("Estas son las caracteristicas existentes: ");
+         try {
                         FileReader fr = new FileReader(f); //Abre un archivo para leerlo
                         BufferedReader br = new BufferedReader(fr);
                         String linea = ""; 
@@ -67,8 +45,36 @@ public class Especificaciones {
                     } catch (IOException ex) {
                     Logger.getLogger(Especificaciones.class.getName()).log(Level.SEVERE, null, ex);
                     }
+        
+        System.out.println("1. Agregar especificaciones");       
+        System.out.println("2. Actualizar especificaciones");
+        System.out.println("3. Eliminar especificaciones");
+        System.out.print("Seleccione operacion a realizar: ");
+        opcion = scan.nextInt();
+        scan.nextLine();
+        
+        switch (opcion) {
+            case 1: 
+                    try {
+                        FileWriter fw = new FileWriter(f, true); //El true indica que hay dats en el archivo para que no los borre y solo agregue datos 
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        System.out.println("Ingrese el nombre de la Especificacion ");
+                        nomEspecificacion = scan.nextLine(); 
+                         String delimitador = "|"; // Especifica el delimitador
+                        StringTokenizer tokenizer = new StringTokenizer(nomEspecificacion, delimitador);
+                        while (nomEspecificacion.isEmpty()) {
+                             System.out.println("El nombre de la especificacion no puede estar en blanco");
+                             System.out.println("Ingrese el nombre de la Especificacion ");
+                             nomEspecificacion = scan.nextLine(); }
+                        bw.write(nomEspecificacion + "\n");
+                        
+                        bw.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Especificaciones.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     break;
-            case 3:
+                    
+            case 2:
                     try {
                         FileReader fr = new FileReader(f);
                         BufferedReader br = new BufferedReader(fr); //Abren el archivo
@@ -77,16 +83,23 @@ public class Especificaciones {
                         FileWriter fw = new FileWriter(fc);
                         BufferedWriter bw = new BufferedWriter(fw);               
                         String linea = "";
-                        
+                        System.out.println("Ingrese el codigo");
+                            codActuEs = scan.nextLine();
+                            
                         while((linea = br.readLine()) != null) {
                             String [] datos = linea.split("\\|");
-                            if (datos[0].compareTo("12345") == 0) {
-                                linea = "123456|ESPECIFICACION ACTUALIZADA";
-                            }
-                            
+                            if (datos[0].compareTo(codActuEs) == 0) {
+                                System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
+                                nuevaEspeci = scan.nextLine();
+                                 while (nuevaEspeci.isEmpty()) {
+                                System.out.println("El nombre de la nueva caracteristica no puede estar en blanco");
+                                System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
+                                nuevaEspeci = scan.nextLine();
+                                }
+                                linea = nuevaEspeci;
+                            }                          
                             bw.write(linea+"\n");
-                        } 
-                        
+                        }                        
                         bw.close();
                         br.close();
                         
@@ -97,7 +110,8 @@ public class Especificaciones {
                     Logger.getLogger(Especificaciones.class.getName()).log(Level.SEVERE, null, ex);
                     } 
                     break;
-            case 4: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
+                    
+            case 3: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
                     try {
                         FileReader fr = new FileReader(f);
                         BufferedReader br = new BufferedReader(fr); //Las primeras 2 lineas abren el archivo para lectura
@@ -108,10 +122,11 @@ public class Especificaciones {
                         BufferedWriter bw = new BufferedWriter(fw);
                         
                         String linea = "";
-                        
+                        System.out.println("Ingrese el codigo");
+                         codigoEliminacion = scan.nextLine(); 
                         while((linea = br.readLine()) != null) { //Lee el archivo original linea por linea
                             String [] datos = linea.split("\\|"); //Utiliza el split que divide la cadena en subcadenas por medio de "|" 
-                            if (datos[0].compareTo("123456") != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
+                            if (datos[0].compareTo(codigoEliminacion) != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
                                 bw.write(linea+"\n"); 
                             }
                         } 

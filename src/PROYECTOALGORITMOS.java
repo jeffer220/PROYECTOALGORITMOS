@@ -22,7 +22,7 @@ public class PROYECTOALGORITMOS {
         switch (opMenu) {
             case 1:
                 Categorias cat = new Categorias();
-                Categorias.Categorias(); 
+                Categorias.Categorias();                
                 break;
                 
             case 2: 
@@ -33,18 +33,11 @@ public class PROYECTOALGORITMOS {
             case 3:
                 Especificaciones especi = new Especificaciones();
                 Especificaciones.Especificaciones();
-                break;
+                break;   
             
-        
-        
-        
-        
-        
-        }
-        
-        
-        
-        
+                
+        }       
+               
         } 
    } 
 

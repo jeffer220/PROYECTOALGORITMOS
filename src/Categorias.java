@@ -28,30 +28,56 @@ public class Categorias {
         String codigoActualizacion = "";
         String codigoEliminacion = "";
         String nuevaCat = "";
+       
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Categorias.txt");
-        
-        
+         
+        System.out.println("Estas son las categorias existentes: ");
+         try {
+                        FileReader fr = new FileReader(f); //Abre un archivo para leerlo
+                        BufferedReader br = new BufferedReader(fr);
+                        String linea = ""; 
+                        while((linea = br.readLine()) != null) { //Realiza la lectura hasta que no haya mas lineas por leer
+                            System.out.println(linea);
+                        } 
+                        br.close();
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                    Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+         
         System.out.println("1. Agregar Categoria");
         System.out.println("2. Actualizar Categorias");
         System.out.println("3. Eliminar Categorias");
         System.out.print("Seleccione operacion a realizar: ");
         opcion = scan.nextInt();
+       
         scan.nextLine();
         switch (opcion) {    
                     
             case 1:                
                try {
+        //Abre el archivo y lo ejecuta para que se pueda escribir en el
         FileWriter fw = new FileWriter(f, true); 
         BufferedWriter bw = new BufferedWriter(fw);
+        //Se le pide al usuario ingresar el codigo y el nombre de la categoria
         System.out.println("Ingrese el codigo y nombre de la categoria separados por | ");
         nomCategoria = scan.nextLine();
-       String delimitador = "|"; // Especifica el delimitador
+        // Especifica el delimitador
+       String delimitador = "|"; 
+       //Utiliza la clase Tokenizer para dividir la cadena en partes delimitadas por "|"
        StringTokenizer tokenizer = new StringTokenizer(nomCategoria, delimitador);
+       //El ciclo while evalua que el usuario no deje en blanco el nombre de la categoria
         while (nomCategoria.isEmpty()) {
+            //Se le notifica al usuario que no se debe dejar en blanco el nombre
             System.out.println("El nombre de la categoria no puede estar en blanco");
+            //Se le pide de nuevo al usuario las veces que sean necesarias que ingrese un nombre valido
                 System.out.println("Ingrese el nombre de la categoria ");
                     nomCategoria = scan.nextLine(); }
+        //Escribe el nombre de la categoria ingresada en el archivo
         bw.write(nomCategoria + "\n");
+        //Cierra el BufferedWriter para asegurarse de que todos los datos se escriban en el archivo.
         bw.close();
         } catch (IOException ex) {
         Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,34 +86,46 @@ public class Categorias {
     
             case 2:
                     try {
+                        //Abre el archivo y lo ejecuta para que pueda escribir en el
                         FileReader fr = new FileReader(f);
-                        BufferedReader br = new BufferedReader(fr); //Abren el archivo
-                        
+                        BufferedReader br = new BufferedReader(fr); 
+                        //Crea un nuevo archivo llamado copiaCategorias.txt en la ruta especificada
                         File fc = new File("C:/PROYECTOALGORITMOSJAVA/copiaCategorias.txt"); //Crea una copia
+                        //Crea un FileWriter para escribir en el archivo
                         FileWriter fw = new FileWriter(fc);
-                        BufferedWriter bw = new BufferedWriter(fw);               
-                        String linea = "";                     
+                        BufferedWriter bw = new BufferedWriter(fw); 
+                        //Se declara la variable linea para que se lean todas las lineas existentes
+                        String linea = "";  
+                        //Se le pide al usuario ingresar el codigo correspondiente a la categoria
                         System.out.println("Ingrese el codigo");
-                            codigoActualizacion = scan.nextLine();                         
-                           while((linea = br.readLine()) != null) {                              
-                            String [] datos = linea.split("\\|");                
+                            codigoActualizacion = scan.nextLine(); 
+                            // el ciclo while lee cada línea del archivo original hasta que no haya más líneas
+                           while((linea = br.readLine()) != null) { 
+                               // Divide la línea leída en un arreglo de Strings usando el carácter '|' como delimitador
+                            String [] datos = linea.split("\\|");  
+                            //Compara la primer division delimitada por "|" con el codigo ingresado por el usuario
                             if (datos[0].compareTo(codigoActualizacion) == 0) {
+                                //Solicita al usuario que ingrese el nuevo codigo y nombre de la categoria
                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
                                 nuevaCat = scan.nextLine();
+                                //El ciclo while evalua que el nuevo nombre de la categoria no este vacio
                                 while (nuevaCat.isEmpty()) {
+                                    //Se le notifica al usuario que el nombre no puede estar en blanco
                                 System.out.println("El nombre de la nueva categoria no puede estar en blanco");
+                                //Se le pide al usuario que ingrese un nombre valido las veces necesarias
                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
                                 nuevaCat = scan.nextLine();
                                 }
+                                //Actualiza la línea con la nueva categoría ingresada por el usuario
                                 linea = nuevaCat;
                             }
-                            
+                            //Escribe la categoria modificada en el archivo
                             bw.write(linea+"\n");
                         } 
-                        
+                        //Cierra el BufferedWriter para asegurarse de que todos los datos se escriban en el archivo
                         bw.close();
                         br.close();
-                        
+                        //Mueve el archivo de copia a la ubicación del archivo original, reemplazando el archivo original si ya existe
                         Files.move(fc.toPath(), f.toPath(), REPLACE_EXISTING);
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(Categorias.class.getName()).log(Level.SEVERE, null, ex);

@@ -32,6 +32,21 @@ public class Caracteristicas {
         
         File carac = new File("C:/PROYECTOALGORITMOSJAVA/Caracteristicas.txt");
         
+         System.out.println("Estas son las caracteristicas existentes: ");
+         try {
+                        FileReader fr = new FileReader(carac); //Abre un archivo para leerlo
+                        BufferedReader br = new BufferedReader(fr);
+                        String linea = ""; 
+                        while((linea = br.readLine()) != null) { //Realiza la lectura hasta que no haya mas lineas por leer
+                            System.out.println(linea);
+                        } 
+                        br.close();
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                    Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
         System.out.println("1. Agregar Caracteristicas");
         System.out.println("2. Actualizar Caracteristcias");
         System.out.println("3. Eliminar Caracteristicas");
@@ -131,6 +146,3 @@ public class Caracteristicas {
     }
     
 }
-
-
-
