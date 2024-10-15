@@ -14,7 +14,7 @@ public class PROYECTOALGORITMOS {
         System.out.println("1. Seccion de Categorias");
         System.out.println("2. Seccion de Caracteristicas");
         System.out.println("3. Seccion de Especificaciones");
-        //System.out.println("4. Eliminar Categorias");//
+        System.out.println("4. Seccion de producto");
         System.out.print("Seleccione la seccion que desee modificar: ");
         opMenu = scan.nextInt();
         
@@ -33,7 +33,12 @@ public class PROYECTOALGORITMOS {
             case 3:
                 Especificaciones especi = new Especificaciones();
                 Especificaciones.Especificaciones();
-                break;   
+                break; 
+            
+            case 4:
+                Productos prod = new Productos();
+                Productos.Productos();
+                break;
             
                 
         }       
