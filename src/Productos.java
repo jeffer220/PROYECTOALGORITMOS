@@ -24,12 +24,13 @@ public class Productos {
         String nomProducto = "";
         String codProdNuevo = "";
         String nuevoProducto = "";
-        
+        String codEliminacion = "";
+        String confirmacion = "";
         File f = new File("C:/PROYECTOALGORITMOSJAVA/Productos.txt");
         
         
         System.out.println("1. Agregar productos");       
-        System.out.println("2. Actualizar datos del producto");
+        System.out.println("2. Eliminar productos");
         System.out.print("Seleccione operacion a realizar: ");
         opcion = scan.nextInt();
         scan.nextLine();
@@ -39,8 +40,10 @@ public class Productos {
                     try {
                         FileWriter fw = new FileWriter(f, true); //El true indica que hay dats en el archivo para que no los borre y solo agregue datos 
                         BufferedWriter bw = new BufferedWriter(fw);
-                        System.out.println("Ingrese el nombre del Producto ");
+                        System.out.println("Ingrese el codigo, nombre del Producto, descripcion y precio separados por | ");
                         nomProducto = scan.nextLine(); 
+                       
+                        
                          String delimitador = "|"; // Especifica el delimitador
                         StringTokenizer tokenizer = new StringTokenizer(nomProducto, delimitador);
                         while (nomProducto.isEmpty()) {
@@ -53,6 +56,45 @@ public class Productos {
                     } catch (IOException ex) {
                         Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    break;
+                    
+                    case 2: //Por medio del identificador verifica si es igual al que quiero eliminar y copia todos los datos en un archivo nuevo menos ek que dese eliminar
+                    try {
+                        FileReader fr = new FileReader(f);
+                        BufferedReader br = new BufferedReader(fr); //Las primeras 2 lineas abren el archivo para lectura
+                        
+                       
+                        File fc = new File("C:/PROYECTOALGORITMOSJAVA/copiaProductos.txt"); //
+                        FileWriter fw = new FileWriter(fc);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        
+                        String linea = "";
+                        System.out.println("Ingrese el codigo");
+                         codEliminacion = scan.nextLine(); 
+                         
+                          System.out.println("Desea eliminar el producto? (Si/No) ");
+                         confirmacion = scan.nextLine();
+                        if (!confirmacion.equalsIgnoreCase("si")) {
+                            System.out.println("Eliminacion Cancelada");
+                            return;
+                        }
+                         
+                        while((linea = br.readLine()) != null) { //Lee el archivo original linea por linea
+                            String [] datos = linea.split("\\|"); //Utiliza el split que divide la cadena en subcadenas por medio de "|" 
+                            if (datos[0].compareTo(codEliminacion) != 0) { //Verifica si el elemento que tiene la posicion 0, el identificador es igual a lo del parentesis lo elimina
+                                bw.write(linea+"\n"); 
+                            }
+                        } 
+                        
+                        bw.close();
+                        br.close();
+                        
+                        Files.move(fc.toPath(), f.toPath(), REPLACE_EXISTING);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                    Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+                    } 
                     break;
                     
                     /*case 2:

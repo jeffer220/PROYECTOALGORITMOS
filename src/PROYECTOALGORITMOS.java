@@ -15,6 +15,7 @@ public class PROYECTOALGORITMOS {
         System.out.println("2. Seccion de Caracteristicas");
         System.out.println("3. Seccion de Especificaciones");
         System.out.println("4. Seccion de producto");
+        System.out.println("5. Seccion de entrada de productos");
         System.out.print("Seleccione la seccion que desee modificar: ");
         opMenu = scan.nextInt();
         
@@ -40,6 +41,9 @@ public class PROYECTOALGORITMOS {
                 Productos.Productos();
                 break;
             
+            case 5:
+                IngresoProductos ing = new IngresoProductos();
+                IngresoProductos.IngresoProductos();
                 
         }       
                
