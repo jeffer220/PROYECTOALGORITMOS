@@ -41,9 +41,7 @@ public class PROYECTOALGORITMOS {
                 Productos.Productos();
                 break;
             
-            case 5:
-                IngresoProductos ing = new IngresoProductos();
-                IngresoProductos.IngresoProductos();
+        
                 
         }       
                

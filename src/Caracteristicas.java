@@ -57,17 +57,25 @@ public class Caracteristicas {
             
             case 1: 
                     try {
+                        //Abre el archivo y lo ejecuta para que se pueda escribir en el
                         FileWriter FW = new FileWriter(carac, true);  
                         BufferedWriter BW = new BufferedWriter(FW);
+                        //Se le pide al usuario ingresar el codigo y el nombre de la categoria
                        System.out.println("Ingrese el codigo y nombre de la categoria separados por | ");
                         nomCaracteristica = scan.nextLine();
-                     String delimitador = "|"; // Especifica el delimitador
+                        // Especifica el delimitador
+                        String delimitador = "|"; 
                         StringTokenizer tokenizer = new StringTokenizer(nomCaracteristica, delimitador);
+                        //El ciclo while evalua que el usuario no deje en blanco el nombre de la caracteristica
                         while (nomCaracteristica.isEmpty()) {
+                            //Se le notifica al usuario que no se debe dejar en blanco el nombre
                              System.out.println("El nombre de la caracteristica no puede estar en blanco");
+                             //Se le pide de nuevo al usuario las veces que sean necesarias que ingrese un nombre valido
                              System.out.println("Ingrese el nombre de la caracteristica ");
                              nomCaracteristica = scan.nextLine(); }
+                        //Escribe el nombre de la categoria ingresada en el archivo
                     BW.write(nomCaracteristica + "\n");
+                     //Cierra el BufferedWriter para asegurarse de que todos los datos se escriban en el archivo.
                     BW.close();
                 } catch (IOException ex) {
                 Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,33 +83,44 @@ public class Caracteristicas {
                 break;    
             case 2:
                     try {
+                        //Abre el archivo y lo ejecuta para que pueda escribir en el
                         FileReader FR = new FileReader(carac);
                         BufferedReader br = new BufferedReader(FR); //Abren el archivo
-                        
+                        //Crea un nuevo archivo llamado copiaCategorias.txt en la ruta especificada
                         File fcarac = new File("C:/PROYECTOALGORITMOSJAVA/CopiaCaracteristicas.txt");
+                         //Crea un FileWriter para escribir en el archivo
                         FileWriter FW = new FileWriter(fcarac);
-                        BufferedWriter bw = new BufferedWriter(FW);               
+                        BufferedWriter bw = new BufferedWriter(FW);  
+                        //Se declara la variable linea para que se lean todas las lineas existentes
                         String linea = "";
+                        //Se le pide al usuario ingresar el codigo correspondiente a la categoria
                         System.out.println("Ingrese el codigo");
                             codActuCarac = scan.nextLine();
-                        
+                        // el ciclo while lee cada línea del archivo original hasta que no haya más líneas
                         while((linea = br.readLine()) != null) {
+                            // Divide la línea leída en un arreglo de Strings usando el carácter '|' como delimitador
                             String [] datos = linea.split("\\|");
+                            //Compara la primer division delimitada por "|" con el codigo ingresado por el usuario
                             if (datos[0].compareTo(codActuCarac) == 0) {
                                  System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
                                 nuevaCarac = scan.nextLine();
+                                //El ciclo while evalua que el nuevo nombre de la categoria no este vacio
                                 while (nuevaCarac.isEmpty()) {
+                                    //Se le pide al usuario que ingrese un nombre valido las veces necesarias
                                 System.out.println("El nombre de la nueva caracteristica no puede estar en blanco");
                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
                                 nuevaCarac = scan.nextLine();
                                 }
+                                //Actualiza la línea con la nueva categoría ingresada por el usuario
                                 linea = nuevaCarac;                               
-                            }                           
+                            }          
+                            //Escribe la categoria modificada en el archivo
                             bw.write(linea+"\n");
-                        }                         
+                        }              
+                         //Cierra el BufferedWriter para asegurarse de que todos los datos se escriban en el archivo
                         bw.close();
                         br.close();
-                        
+                        //Mueve el archivo de copia a la ubicación del archivo original, reemplazando el archivo original si ya existe
                         Files.move(fcarac.toPath(), carac.toPath(), REPLACE_EXISTING);
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
