@@ -102,42 +102,7 @@ public class Productos {
                     } 
                     break;
                     
-                    /*case 2:
-                    try {
-                        FileReader FR = new FileReader(f);
-                        BufferedReader br = new BufferedReader(FR); //Abren el archivo
-                        
-                        File fcarac = new File("C:/PROYECTOALGORITMOSJAVA/copiaProductos.txt");
-                        FileWriter FW = new FileWriter(fcarac);
-                        BufferedWriter bw = new BufferedWriter(FW);               
-                        String linea = "";
-                        System.out.println("Ingrese el codigo");
-                            codProdNuevo = scan.nextLine();
-                        
-                        while((linea = br.readLine()) != null) {
-                            String [] datos = linea.split("\\|");
-                            if (datos[0].compareTo(codProdNuevo) == 0) {
-                                 System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
-                                nuevoProducto = scan.nextLine();
-                                while (nuevoProducto.isEmpty()) {
-                                System.out.println("El nombre del producto no puede estar en blanco");
-                                System.out.println("Ingrese el codigo y el nombre actualizado separados por |");
-                                nuevoProducto = scan.nextLine();
-                                }
-                                linea = nuevoProducto;                               
-                            }                           
-                            bw.write(linea+"\n");
-                        }                         
-                        bw.close();
-                        br.close();
-                        
-                        Files.move(fcarac.toPath(), f.toPath(), REPLACE_EXISTING);
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(Caracteristicas.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                    Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
-                    } 
-                      break;*/
+                    
         }
     }
 }
